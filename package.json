@@ -1,0 +1,37 @@
+{
+  "name": "auth0-tweet-sentiment-analysis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "SET NODE_ENV=development&&webpack -d",
+    "build:prod": "SET NODE_ENV=production&&webpack -p",
+    "debug": "npm run build:dev && npm start",
+    "debug:prod": "npm run build:prod && npm start",
+    "deploy": "npm run build:prod && wt create -p node8 --secrets-file .secrets webtask.js",
+    "start": "wt serve webtask.js --hostname localhost --port 7071 --secrets-file .secrets"
+  },
+  "author": "Gary Gambill",
+  "license": "MIT",
+  "dependencies": {
+    "azure-storage": "^2.6.0",
+    "babel-runtime": "^6.26.0",
+    "moment": "^2.19.1",
+    "node-fetch": "^1.7.3",
+    "object.entries": "^1.0.4",
+    "sentiment": "^4.1.0",
+    "twit": "^2.2.9"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "lodash": "^4.17.4",
+    "request-promise": "^4.2.2",
+    "rimraf": "^2.6.2",
+    "webpack": "^3.8.1",
+    "webpack-node-externals": "^1.6.0",
+    "wt-cli": "^8.1.0"
+  }
+}
