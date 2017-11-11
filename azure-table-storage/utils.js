@@ -15,7 +15,8 @@ export default class Utils {
             'MM/DD/YYYY', 
             'MM-DD-YYYY', 
             'DD/MM/YYYY', 
-            'DD-MM-YYYY', 
+            'DD-MM-YYYY',
+            '\'dd MMM DD HH:mm:ss ZZ YYYY\', \'en\'', // twitter  
             moment.ISO_8601
         ];
 
@@ -74,7 +75,14 @@ export default class Utils {
                     if (value.length === 36 && this.isGuid(value)) {
                         finalObject[key] = this.entGen.Guid(value);
                     } else if (moment(value, this.momentDateParseArray, true).isValid()) {
+                        //console.log(moment(value, this.momentDateParseArray).format())
+
+
+                        
                         finalObject[key] = this.entGen.DateTime(moment(value, this.momentDateParseArray).format());
+                        //console.log('finalObject[key] - ', finalObject[key]);
+                        if(finalObject[key]._ === 'Invalid date')
+                            console.log('value - ', value);
                     } else {
                         finalObject[key] = this.entGen.String(value);
                     };

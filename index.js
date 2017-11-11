@@ -2,6 +2,7 @@
 import azure from 'azure-storage';
 import Twit from 'twit';
 import sentiment from 'sentiment';
+import moment from 'moment';
 import TableOps from './azure-table-storage/table-ops';
 import EntityOps from './azure-table-storage/entity-ops';
 
@@ -38,8 +39,9 @@ let createTable = async (tableService) => {
   try{
       let action = new TableOps({tableName: 'twitterSentimentAnalysis'}, tableService, 'createTableIfNotExists');
       return await action.run().then(response => {
+        console.log('response - ', response);
         if (response instanceof Error) {
-            console.log('error in response')
+            //console.log('error in response')
             return {
               status: response.status ? response.status : 500,
               body: {
@@ -80,13 +82,16 @@ let getTweets = async (twitter, twitterAPISearchArgs) => {
           // get sentimate score for each tweet
           let sentimentScore = sentiment(tweet.text);
 
+          // setup the data for table storage the slice(4) on the tweet.created_at is there
+          // to get past a bug with moment.js parsing of the twitter date pattern for dates that fall
+          // on Thursday.  'Thu' was not being parsed with the standard 'ddd' pattern for moment.js
           let savedTweet = {
             PartitionKey: 'auth0Tweets',
             RowKey: tweet.id_str,
             id: tweet.id_str,
             text: tweet.text,
             user: tweet.user.screen_name,
-            created_at: tweet.created_at,
+            created_at: moment(tweet.created_at.slice(4), 'MMM DD HH:mm:ss ZZ YYYY', 'en').format(),
             user_followers_count: tweet.user.followers_count,
             hashtags: tweet.entities.hashtags,
             geo: tweet.geo,

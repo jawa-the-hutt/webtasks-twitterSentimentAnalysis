@@ -46,8 +46,9 @@ export default class EntityOps {
                 for(let entity of data.slice(batchIndex, (batchIndex + maxItemsInBatch))){  
                     // get data ready for azure api.  this is more of a dynamic entity generator function
                     // so that all the appropriate odata tags get added. 
+                    
                     entity = await this.serializeEntity(entity);
-
+                    //console.log('entity - ', entity)
                     if(entity instanceof Error){
                         throw entity;
                     } else {
