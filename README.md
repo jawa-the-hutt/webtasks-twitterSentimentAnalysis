@@ -22,7 +22,13 @@ It must also be noted that in this dashboard, tweets by any account name that st
 
 Almost everything is done in ES6/ES7 and uses Async/Await extensively.  The Azure Table Storage code is currently self contained in this repo, but at some point in the near future will probably be moved out to a seperate repo/npm package as it's essentially a multi-use wrapper for most all of the Azure Table Storage functions found in the [`azure-storage`][3] package.
 
-To use ES6/ES7 on [webtasks.io][1], you will have to compile locally and then publish to the service.  This repo has relied on wepback & babel to do this.  Take a look at the `package.json`, `webpack.config.js` and `.babelrc` files to see how things are configured to allow this to happen.  There are several scripts in the `package.json` file that will allow you to build and debug locally before publishing.
+To use ES6/ES7 on [webtasks.io][1], you will have to compile locally and then publish to the service via the `wt cli` process.  This repo has relied on wepback & babel to do this.  Take a look at the `package.json`, `webpack.config.js` and `.babelrc` files to see how things are configured to allow this to happen.  There are several scripts in the `package.json` file that will allow you to build and debug locally before publishing.
+
+Additionally, you will need a `.secrets` file in the base of your project and any sensitve information such as Twitter API keys and Azure Table Storage keys will go in there.When you publish the webtask via the scripts on `package.json`, the `wt cli` will encrypt these during the upload for storage and use on [webtasks.io][1].  If you aren't familiar with the structure of this file, it is a simple key/value file like the following:
+```
+this=that
+```
+
 
  [1]: <https://webtask.io>
  [2]: <https://twitter-sentiment-analysis.azurewebsites.net/>
