@@ -39,7 +39,7 @@ let createTable = async (tableService) => {
   try{
       let action = new TableOps({tableName: 'twitterSentimentAnalysis'}, tableService, 'createTableIfNotExists');
       return await action.run().then(response => {
-        console.log('response - ', response);
+        //console.log('response - ', response);
         if (response instanceof Error) {
             //console.log('error in response')
             return {
