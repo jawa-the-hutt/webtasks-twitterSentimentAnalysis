@@ -95,11 +95,7 @@ This repo contains example code that will show you how to:
 
 Be forewarned, the Twitter search API doesn't allow paging through the data as most well defined API's do. We get around this by trying to mimic a normal paging effort by taking in the max number of records at a time (100), and then go back and get 100 more until there isn't any further records retured.
 
-What is not in this repo is a Power BI workbook that takes the information saved in Azure Table Storage and then graphically represents the overall sentimate of tweets about your search criteria. You can view an example of what this looks like here:  [Auth0 Twitter Sentiment Analysis][2].  The data in this dashboard will update approximately every 3 hours or so and this limitation is due to Power BI and not this webtask.  The run time for the webtask that feeds this dashboard generally takes about 3-5 seconds to pull well over 1000 tweets, score them and then save them to Azure Table Storage.
-
-It must also be noted that in this dashboard, tweets by any account name that starts with `auth0` are filtered out as well as any tweet that starts with `RT: ` as this would signify a retweet and as such, might skew the overall Positive/Negative sentiment.
-
-Almost everything is done in ES6/ES7 and uses Async/Await extensively.  The Azure Table Storage code is currently self contained in this repo, but at some point in the near future will probably be moved out to a seperate repo/npm package as it's essentially a multi-use wrapper for most all of the Azure Table Storage functions found in the [`azure-storage`][3] package.
+Almost everything is done in ES6/ES7 and uses Async/Await extensively.  The Azure Table Storage code is currently self contained in this repo, but at some point in the future will probably be moved out to a seperate repo/npm package as it's essentially a multi-use wrapper for most all of the Azure Table Storage functions found in the [`azure-storage`][3] package.
 
 To use some ES6/ES7 functions on [webtasks.io][1], you have to compile locally and then publish to the service via the `wt` client  This repo has relied on wepback & babel to do this.  Take a look at the `package.json`, `webpack.config.js` and `.babelrc` files to see how things are configured to allow this to happen.
 
@@ -108,6 +104,5 @@ To use some ES6/ES7 functions on [webtasks.io][1], you have to compile locally a
 This project is licensed under the MIT License - see the [LICENSE.md][4] file for details
 
  [1]: <https://webtask.io>
- [2]: <https://twitter-sentiment-analysis.azurewebsites.net/>
  [3]: <https://github.com/Azure/azure-storage-node>
  [4]: <https://github.com/jawa-the-hutt/webtasks-twitterSentimentAnalysis/blob/master/LICENSE.md>
