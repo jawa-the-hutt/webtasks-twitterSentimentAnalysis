@@ -17,7 +17,7 @@
   "dependencies": {
     "azure-storage": "^2.6.0",
     "babel-runtime": "^6.26.0",
-    "moment": "^2.19.1",
+    "moment": "^2.29.2",
     "object.entries": "^1.0.4",
     "sentiment": "^4.1.0",
     "twit": "^2.2.9"
